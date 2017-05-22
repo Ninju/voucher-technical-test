@@ -7,12 +7,10 @@ describe "Integration" do
     let(:voucher) { nil }
 
     it 'should bill default price all the time' do
-        user.create_order
-        expect(user.orders[0].total).to eql 6.95
-        user.create_order
-        expect(user.orders[1].total).to eql 6.95
-        user.create_order
-        expect(user.orders[2].total).to eql 6.95
+      3.times do
+        order = user.create_order
+        expect(order.total).to eql 6.95
+      end
     end
   end
 

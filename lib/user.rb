@@ -13,5 +13,7 @@ class User
     new_order = Order.new(self)
 
     @orders << new_order
+
+    new_order
   end
 end

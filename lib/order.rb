@@ -8,6 +8,6 @@ class Order
   end
 
   def total
-    0.0
+    DEFAULT_PRICE
   end
 end
