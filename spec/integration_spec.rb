@@ -1,4 +1,4 @@
-require 'user'
+require 'spec_helper'
 
 describe "Integration" do
   let(:user) { User.new(voucher: voucher) }
