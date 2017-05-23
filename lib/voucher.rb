@@ -5,7 +5,11 @@ class Voucher
   def self.create(type, **attrs)
     case type
     when :discount
-      DiscountVoucher.new(attrs)
+      DiscountVoucher.new(
+        discount_percentage: attrs.fetch(:amount),
+        number_of_uses: attrs.fetch(:number),
+        is_instant: attrs.fetch(:instant) { nil }
+      )
     else
       CreditVoucher.new(credit: attrs.fetch(:amount))
     end

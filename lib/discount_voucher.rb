@@ -1,9 +1,9 @@
 class DiscountVoucher
-  def initialize(**attrs)
+  def initialize(discount_percentage:, number_of_uses:, is_instant: false)
     @times_used = 0
-    @number_of_permitted_uses = attrs.fetch(:number) { Float::INFINITY }
-    @discount_rate_as_percentage = attrs.fetch(:amount) / 100.0
-    @is_instant = attrs.fetch(:instant) { false }
+    @number_of_permitted_uses = number_of_uses
+    @discount_percentage_as_decimal = discount_percentage / 100.0
+    @is_instant = is_instant
   end
 
   def apply!(base_cost)
@@ -11,7 +11,7 @@ class DiscountVoucher
 
     @times_used += 1
 
-    discounted_base_cost = base_cost * discount_rate_as_percentage
+    discounted_base_cost = base_cost * discount_percentage_as_decimal
 
     if instant?
       if times_used == 1
@@ -26,7 +26,7 @@ class DiscountVoucher
 
   private
 
-  attr_reader :times_used, :discount_rate_as_percentage, :number_of_permitted_uses, :is_instant
+  attr_reader :times_used, :discount_percentage_as_decimal, :number_of_permitted_uses, :is_instant
 
   def instant?
     @is_instant
