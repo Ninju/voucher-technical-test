@@ -1,7 +1,9 @@
+require 'discount_voucher'
+
 class Voucher
   attr_accessor :type, :amount, :number, :instant
 
-  def initialize(type, **attrs)
+  def initialize(**attrs)
     @type = type
     @amount = attrs[:amount]
     @number = attrs[:number]
@@ -10,7 +12,12 @@ class Voucher
   end
 
   def self.create(type, **attrs)
-    new(type, **attrs)
+    case type
+    when :discount
+      DiscountVoucher.new(**attrs)
+    else
+      new(**attrs)
+    end
   end
 
   def apply!(base_cost)
