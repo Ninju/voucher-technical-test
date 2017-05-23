@@ -48,14 +48,14 @@ describe "Integration" do
         let(:voucher) { Voucher.create(:discount, amount: 50, number: 3, instant: true) }
 
         it 'should pay 3 bags instantly and charge forth normally' do
-          user.create_order
-          expect(user.orders[0].total).to eql 10.425
-          user.create_order
-          expect(user.orders[1].total).to eql 0.0
-          user.create_order
-          expect(user.orders[2].total).to eql 0.0
-          user.create_order
-          expect(user.orders[3].total).to eql 6.95
+          first_order = user.create_order
+          expect(first_order.total).to eql 10.425
+          second_order = user.create_order
+          expect(second_order.total).to eql 0.0
+          third_order = user.create_order
+          expect(third_order.total).to eql 0.0
+          fourth_order = user.create_order
+          expect(fourth_order.total).to eql 6.95
         end
       end
     end
