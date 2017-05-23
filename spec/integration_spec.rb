@@ -19,12 +19,12 @@ describe "Integration" do
       let(:voucher) { Voucher.create(:credit, amount: 15) }
 
       it 'should not bill user if has a remaining credit' do
-        user.create_order
-        expect(user.orders[0].total).to eql 0.0
-        user.create_order
-        expect(user.orders[1].total).to eql 0.0
-        user.create_order
-        expect(user.orders[2].total).to eql 5.85
+        first_order = user.create_order
+        expect(first_order.total).to eql 0.0
+        second_order = user.create_order
+        expect(second_order.total).to eql 0.0
+        third_order = user.create_order
+        expect(third_order.total).to be_within(0.001).of(5.85)
       end
     end
 

@@ -12,6 +12,8 @@ class User
   def create_order
     new_order = Order.new(self)
 
+    new_order.apply_voucher(voucher) if voucher
+
     @orders << new_order
 
     new_order
