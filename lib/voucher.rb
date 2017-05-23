@@ -7,7 +7,7 @@ class Voucher
     when :discount
       DiscountVoucher.new(attrs)
     else
-      CreditVoucher.new(attrs)
+      CreditVoucher.new(credit: attrs.fetch(:amount))
     end
   end
 end

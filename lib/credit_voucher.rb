@@ -1,6 +1,6 @@
 class CreditVoucher
-  def initialize(**attrs)
-    @amount = attrs[:amount]
+  def initialize(credit:)
+    @credit = credit
     @credit_used = 0.0
   end
 
@@ -16,9 +16,9 @@ class CreditVoucher
 
   private
 
-  attr_reader :credit_used, :amount
+  attr_reader :credit_used, :credit
 
   def remaining_credit
-    [amount - credit_used, 0.0].max
+    [credit - credit_used, 0.0].max
   end
 end
