@@ -26,6 +26,17 @@ describe "Integration" do
         third_order = user.create_order
         expect(third_order.total).to be_within(0.001).of(5.85)
       end
+
+      context 'with limited uses' do
+        let(:voucher) { Voucher.create(:credit, amount: 15, number: 1) }
+
+        it 'should use the voucher just 1 time' do
+          first_order = user.create_order
+          expect(first_order.total).to eql 0.0
+          second_order = user.create_order
+          expect(second_order.total).to eql 6.95
+        end
+      end
     end
 
     describe 'discount vouchers' do
